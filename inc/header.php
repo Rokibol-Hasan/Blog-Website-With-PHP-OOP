@@ -1,3 +1,12 @@
+<?php
+session_start();
+if (!isset($_SESSION['username'])) {
+    header("Location:login.php");
+}
+
+
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -83,8 +92,17 @@
             color: white;
         }
 
-        .blog-footer a{
+        .blog-footer a {
             color: white;
+        }
+
+        .header img {
+            width: 100%;
+            height: 90px;
+        }
+
+        .position-sticky.card.p-2 {
+            margin: 0px !important;
         }
     </style>
 
@@ -96,7 +114,7 @@
 </head>
 
 <body>
-    <section class="header alert">
+    <section class="header">
         <div class="container-fluid">
             <div class="blog-header">
                 <div class="container">
@@ -109,7 +127,8 @@
                                 <li><a class="px-2" href="index.php">Home</a></li>
                                 <li><a class="px-2" href="index.php">About Us</a></li>
                                 <li><a class="px-2" href="index.php">Contact</a></li>
-                                <li><a class="px-2" href="index.php">Login|Register</a></li>
+                                <li><a class="px-2" href="register.php">Register</a></li>
+                                <li><a class="px-2" href="login.php">login</a></li>
                             </ul>
                         </nav>
                     </div>

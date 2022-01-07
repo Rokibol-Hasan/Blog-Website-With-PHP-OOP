@@ -2,15 +2,11 @@
 <?php
 $userHandler = new userHandler();
 $getData = $userHandler->selectAllPost();
-session_start();
-if (!isset($_SESSION['username'])) {
-    header("Location:login.php");
-}
 ?>
 <section class="post-body">
     <div class="container">
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-8 card p-3">
                 <?php
                 if ($getData) {
                     while ($row = $getData->fetch_assoc()) { ?>
