@@ -10,6 +10,24 @@
                             Dashboard
                         </a>
                     </li>
+
+                    <?php
+                    if (($_SESSION['role']) == '1') { ?>
+                        <li class="nav-item list-group-item">
+                            <a class="nav-link" href="allusers.php">
+                                <span data-feather="file"></span>
+                                All Users
+                            </a>
+                        </li>
+                        <li class="nav-item list-group-item">
+                            <a class="nav-link" href="adduser.php">
+                                <span data-feather="file"></span>
+                                Add New User
+                            </a>
+                        </li>
+                    <?php  } ?>
+
+
                     <li class="nav-item list-group-item">
                         <a class="nav-link" href="allpost.php">
                             <span data-feather="file"></span>
@@ -37,7 +55,7 @@
             </div>
         </nav>
         <div class="col-md-3 mt-5">
-            
+
         </div>
         <div class="col-md-3 mt-5">
             <h4>Edit Links</h4>

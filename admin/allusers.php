@@ -1,12 +1,10 @@
 <?php include "../admin/inc/header.php";
-include "../helpers/functions.php";
 ?>
 
 <?php
 $userHandler = new userHandler();
 $getData = $userHandler->selectAlluser();
 $x=1;
-
 ?>
 <div class="container">
     <div class="row">
@@ -36,8 +34,8 @@ $x=1;
                                         <td><?php echo $row['email']; ?></td>
                                         <td><?php echo $row['role']; ?></td>
                                         <td>
-                                            <a href="editpost.php?id=<?php echo $row['id']; ?>" class="btn btn-primary">Edit</a>
-                                            <a href="allpost.php?delete=<?php echo $row['id']; ?>" class="btn btn-primary" name="delete">Delete</a>
+                                            <a href="editusers.php?id=<?php echo $row['id']; ?>" class="btn btn-primary">Edit</a>
+                                            <a href="allusers.php?delete=<?php echo $row['id']; ?>" class="btn btn-primary" name="delete">Delete</a>
                                         </td>
                                     </tr>
                                 </tbody>

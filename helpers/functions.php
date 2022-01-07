@@ -220,6 +220,27 @@ class userHandler
             return $getData;
         }
     }
+    //Add new user
+    function addNewUser()
+    {
+        if (isset($_POST['submit'])) {
+            $username = mysqli_real_escape_string($this->db->link, $_POST['username']);
+            $email = mysqli_real_escape_string($this->db->link, $_POST['email']);
+            $role = mysqli_real_escape_string($this->db->link, $_POST['role']);
+            $password = md5($_POST['password']);
+            if ($username == '' || $email == '' || $role == '' || $password == '') {
+                echo "Field Must Not be empty";
+            } else {
+                $query = "INSERT INTO tbl_user (username,email,role,password) VALUES ('$username','$email','$role','$password')";
+                $addNewUser = $this->db->insert($query);
+                if ($addNewUser) {
+                    header("Location:allusers.php");
+                } else {
+                    return false;
+                }
+            }
+        }
+    }
 
     // Login check by pull and match username and password
     function checkLogin($username, $password)
