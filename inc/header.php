@@ -104,6 +104,10 @@ if (!isset($_SESSION['username'])) {
         .position-sticky.card.p-2 {
             margin: 0px !important;
         }
+
+        .pagination .page-link {
+            color: lightseagreen !important;
+        }
     </style>
 
 
