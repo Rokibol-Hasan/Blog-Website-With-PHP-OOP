@@ -1,12 +1,7 @@
 <?php
-session_start();
-if (!isset($_SESSION['username'])) {
-    header("Location:login.php");
-}
-
-
+include "lib/database.php";
+include "helpers/functions.php";
 ?>
-
 <!doctype html>
 <html lang="en">
 
@@ -108,6 +103,78 @@ if (!isset($_SESSION['username'])) {
         .pagination .page-link {
             color: lightseagreen !important;
         }
+
+        .sidebar.widget {
+            /* background: #f2f2f2; */
+            border: 1px solid #ddd;
+            padding: 10px 20px;
+        }
+
+        .sidebar.widget ul {
+            margin: 0px;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .sidebar.widget ul li {
+            overflow: hidden;
+            font-size: 14px;
+            margin-bottom: 20px;
+            border-bottom: 1px dashed #ddd;
+            padding-bottom: 20px
+        }
+
+        .sidebar-thumb {
+            float: left;
+            overflow: hidden;
+            margin-right: 15px;
+        }
+
+        .sidebar-thumb img {
+            background: #fff;
+            border: 1px dashed #e0e0e0;
+            padding: 6px;
+            height: 75px;
+            width: 75px;
+
+            -webkit-border-radius: 100px;
+            -moz-border-radius: 100px;
+            border-radius: 100px;
+        }
+
+        .sidebar-content p {
+            font-size: 16px;
+            font-weight: 400;
+            text-align: justify;
+            cursor: pointer;
+            line-height: 24px;
+        }
+
+        .sidebar-content p a:hover {
+            color: #2996bd;
+        }
+
+        .sidebar-content p a {
+            color: lightseagreen;
+            outline: 0 none;
+            text-decoration: none;
+        }
+
+        .sidebar-meta {
+            margin-top: 10px;
+        }
+
+        .sidebar-meta span {
+            color: #2e2e2e;
+        }
+
+        .sidebar-meta span.time {
+            margin-right: 10px;
+        }
+
+        .sidebar-meta span i {
+            color: #2996bd
+        }
     </style>
 
 
@@ -124,7 +191,7 @@ if (!isset($_SESSION['username'])) {
                 <div class="container">
                     <div class="nav-scroller">
                         <nav class="nav navbar">
-                            <a class="navbar-brand" href="#">
+                            <a class="navbar-brand" href="index.php">
                                 <img src="admin/upload/logo.png" alt="..." height="36">
                             </a>
                             <ul class="">

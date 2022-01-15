@@ -1,31 +1,43 @@
-
-<?php $getData = $userHandler->selectAllcat();?>
+<?php
+$db = new Database();
+$getData = $userHandler->selectAllcat();
+$widget = "SELECT * FROM tbl_post LIMIT 5";
+$result = $db->select($widget);
+?>
 <div class="position-sticky card p-2" style="top: 2rem; margin-top:20px;">
-    <div class="p-4 mb-3 bg-light rounded">
-        <h4 class="fst-italic">About</h4>
-        <p class="mb-0">Customize this section to tell your visitors a little bit about your publication, writers, content, or something else entirely. Totally up to you.</p>
+    <div class="p-4">
+        <div class="sidebar widget">
+            <h3>Recent Post</h3>
+            <ul>
+                <?php if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) { ?>
+                        <li>
+                            <div class="sidebar-thumb">
+                                <img class="animated rollIn" src="admin/upload/<?php echo $row['image']; ?>" alt="post image" />
+                            </div><!-- .Sidebar-thumb -->
+                            <div class="sidebar-content">
+                                <p class="animated bounceInRight"><a href="singlepost.php?id=<?php echo $row['id']?>"><?php echo $row['title']; ?></a></p>
+                            </div><!-- .Sidebar-thumb -->
+                            <div class="sidebar-meta">
+                                <span class="time"><i class="fa fa-clock-o"></i><?php echo $row['date']; ?></span>
+                            </div><!-- .Sidebar-meta ends here -->
+                        </li>
+                <?php }
+                } ?>
+                <!-- .Li ends here -->
+            </ul><!-- .Ul ends how ends here -->
+        </div><!-- .Container ends here -->
     </div>
-
-
-    <div class="p-4 category">
-        <h4 class="fst-italic">Catagories</h4>
-        <ul class="list-unstyled mb-0">
+    <div class="p-4 widget category">
+        <ul class="list-unstyled list-group mb-0">
+            <li class="list-group-item">
+                <h4 class="">Catagories</h4>
+            </li>
             <?php if ($getData) { ?>
                 <?php while ($row = $getData->fetch_assoc()) { ?>
-                    <li><a href="#"><?php echo $row['cat_name']; ?></a></li>
+                    <li class="list-group-item"><a href="posts.php?category=<?php echo $row['cat_name'] ?>"><?php echo $row['cat_name']; ?></a></li>
                 <?php } ?>
             <?php } ?>
         </ul>
-
-    </div>
-
-
-    <div class="p-4">
-        <h4 class="fst-italic">Share to</h4>
-        <ol class="list-unstyled">
-            <li><a href="#">GitHub</a></li>
-            <li><a href="#">Twitter</a></li>
-            <li><a href="#">Facebook</a></li>
-        </ol>
     </div>
 </div>

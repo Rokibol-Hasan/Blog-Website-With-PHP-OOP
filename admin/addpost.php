@@ -1,12 +1,12 @@
-<?php include "../admin/inc/header.php";
-// include "../helpers/functions.php";
+<?php include "inc/header.php";
 $userHandler = new userHandler();
 $insertPost = $userHandler->insertPost();
 $getCat = $userHandler->selectAllcat();
 ?>
-<div class="container">
+<div class="container-fluid">
     <div class="row">
-        <div class="col-md-6">
+        <?php include "../admin/inc/indexnav.php"; ?>
+        <div class="col-md-9 card my-3">
             <div class="add-post-form">
                 <form action="addpost.php" method="post" enctype="multipart/form-data">
                     <div class="form-group">

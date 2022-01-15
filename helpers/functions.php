@@ -1,7 +1,7 @@
 <?php
 class userHandler
 {
-    private $db;
+    public $db;
     public function __construct()
     {
         $this->db = new Database();
@@ -15,6 +15,17 @@ class userHandler
         $text = $text . "....";
         return $text;
     }
+    
+    //Security Confirmation 
+    public function validation($data){
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
+
+    }
+ 
+
     //Get all post
     function selectAllpost()
     {
@@ -25,7 +36,7 @@ class userHandler
     //Get all category
     function selectAllcat()
     {
-        $query = "SELECT * FROM tbl_cat LIMIT 5";
+        $query = "SELECT * FROM tbl_cat";
         $getData = $this->db->select($query);
         return $getData;
     }
@@ -162,6 +173,15 @@ class userHandler
         $getData = $this->db->select($query)->fetch_assoc();
         return $getData;
     }
+
+    //select post by cat
+
+function selectPostByCat($catName){
+        $query = "SELECT * FROM tbl_post WHERE cat_name = '$catName'";
+        $getData = $this->db->select($query);
+        return $getData;
+    }
+
     //Update A Category with read and right by (selection by id) and Update query
     function updateCat($id, $catName)
     {
@@ -243,26 +263,31 @@ class userHandler
     }
 
     // Login check by pull and match username and password
-    function checkLogin($username, $password)
-    {
-        $password = md5($password);
-        $query = "SELECT id,username,role FROM tbl_user WHERE email='$username' or username='$username' and password='$password'";
-        $result = $this->db->select($query);
-        if (mysqli_num_rows($result) > 0) {
-            $row = $result->fetch_assoc();
-            session_start();
-            $_SESSION['username'] = $row['username'];
-            $_SESSION['password'] = $row['password'];
-            $_SESSION['role']  = $row['role'];
-            header("Location:index.php");
-        } else {
-            return false;
+
+    public function setSession(){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $username = $this->validation($_POST['username']);
+            $password = $this->validation(md5($_POST['password']));
+            $username = mysqli_real_escape_string($this->db->link, $username);
+            $password = mysqli_real_escape_string($this->db->link, $password);
+
+            $query = "SELECT * FROM tbl_user WHERE username = '$username' AND password = '$password'";
+            $result = $this->db->select($query);
+            if ($result != false) {
+                $value = mysqli_fetch_array($result);
+                $row = mysqli_num_rows($result);
+                if ($row > 0) {
+                    Session::set("login", true);
+                    Session::set("username", $value['username']);
+                    Session::set("userId", $value['id']);
+                    header("Location:index.php");
+                } else {
+                    echo "No user found";
+                }
+            } else {
+                echo "User Name Or Password Not Matched";
+            }
         }
     }
-    function pagination($startFrom, $perPage)
-    {
-        $query = "SELECT * FROM tbl_post LIMIT $startFrom,$perPage";
-        $getData = $this->db->select($query);
-        return $getData;
-    }
+    
 }

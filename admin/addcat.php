@@ -1,9 +1,8 @@
-<?php include "../admin/inc/header.php"; 
-include "../helpers/functions.php";
-?>
-<div class="container">
+<?php include "inc/header.php"; ?>
+<div class="container-fluid">
     <div class="row">
-        <div class="col-md-6">
+        <?php include "../admin/inc/indexnav.php"; ?>
+        <div class="col-md-6 card my-3">
             <div class="add-cat-form">
                 <?php
                 $userHandler = new userHandler();

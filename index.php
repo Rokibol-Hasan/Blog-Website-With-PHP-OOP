@@ -1,4 +1,6 @@
-<?php include "init.php"; ?>
+<?php 
+include "inc/header.php";
+?>
 <section class="post-body">
     <div class="container">
         <div class="row">
@@ -17,7 +19,7 @@
                 $userHandler = new userHandler();
                 $query = "SELECT * FROM tbl_post LIMIT $start_from,$per_page";
                 $post = $db->select($query);
-                if ($post) {
+                if ($post->num_rows>0) {
                     while ($getData = $post->fetch_assoc()) {
                 ?>
                         <article class="blog-post">
@@ -25,9 +27,6 @@
                             <ul>
                                 <li>
                                     <p class="blog-post-meta"><?php echo $getData['date']; ?></p>
-                                </li>
-                                <li>
-                                    <p class="blog-post-meta  mx-2"><?php echo $_SESSION['username']; ?></p>
                                 </li>
                                 <li>
                                     <p class="blog-post-meta mx-2"><?php echo $getData['cat_name']; ?></p>

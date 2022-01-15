@@ -1,14 +1,14 @@
 <?php
 include "../admin/inc/header.php";
-// include "../helpers/functions.php";
 ?>
 <?php
 $userHandler = new userHandler();
 $addNewUser = $userHandler->addNewUser();
 ?>
-<div class="container">
+<div class="container-fluid">
     <div class="row">
-        <div class="col-md-6">
+        <?php include "../admin/inc/indexnav.php"; ?>
+        <div class="col-md-9 card my-3">
             <div class="add-post-form">
 
                 <form action="" method="post">

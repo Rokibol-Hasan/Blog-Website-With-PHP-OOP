@@ -1,4 +1,5 @@
-<?php include "config.php"; ?>
+<?php
+include "config.php"; ?>
 <?php
 //Mother Class Declaration
 class Database
@@ -27,11 +28,12 @@ class Database
     public function select($query)
     {
         $result = $this->link->query($query);
-        if ($result->num_rows > 0) {
-            return $result;
-        } else {
-            return false;
-        }
+        return $result;
+        // if ($result->num_rows > 0) {
+        //     return $result;
+        // } else {
+        //     return false;
+        // }
     }
     //Insert Query Will Pass Here
     public function insert($query)

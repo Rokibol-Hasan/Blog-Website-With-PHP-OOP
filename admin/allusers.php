@@ -4,11 +4,12 @@
 <?php
 $userHandler = new userHandler();
 $getData = $userHandler->selectAlluser();
-$x=1;
+$x = 1;
 ?>
-<div class="container">
+<div class="container-fluid">
     <div class="row">
-        <div class="col-md-12">
+        <?php include "../admin/inc/indexnav.php"; ?>
+        <div class="col-md-9 card my-3">
             <div class="post-table">
                 <div class="table-heading mt-3 mb-2">
                     <h1> All Users </h1>
@@ -24,7 +25,7 @@ $x=1;
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
-                        <?php if ($getData) { ?>
+                        <?php if ($getData->num_rows>0) { ?>
                             <?php while ($row = $getData->fetch_assoc()) { ?>
                                 <tbody>
                                     <tr>

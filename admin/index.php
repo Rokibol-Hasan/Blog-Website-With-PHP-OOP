@@ -1,64 +1,56 @@
-<?php include "../admin/inc/header.php"; ?>
+<?php include "inc/header.php"; ?>
+
+<?php
+
+$dataPoints = array(
+    array("x" => 10, "y" => 41),
+    array("x" => 20, "y" => 35, "indexLabel" => "Lowest"),
+    array("x" => 30, "y" => 50),
+    array("x" => 40, "y" => 45),
+    array("x" => 50, "y" => 52),
+    array("x" => 60, "y" => 68),
+    array("x" => 70, "y" => 38),
+    array("x" => 80, "y" => 71, "indexLabel" => "Highest"),
+    array("x" => 90, "y" => 52),
+    array("x" => 100, "y" => 60),
+    array("x" => 110, "y" => 36),
+    array("x" => 120, "y" => 49),
+    array("x" => 130, "y" => 41)
+);
+
+?>
+
+
 <div class="container-fluid">
     <div class="row">
-        <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
-            <div class="position-sticky pt-3">
-                <ul class="nav flex-column card">
-                    <li class="nav-item list-group-item">
-                        <a class="nav-link active" aria-current="page" href="#">
-                            <span data-feather="home"></span>
-                            Dashboard
-                        </a>
-                    </li>
+        <?php include "inc/indexnav.php"; ?>
+        <div class="col-md-5 mt-5">
+            <script>
+                window.onload = function() {
 
-                    <?php
-                    if (($_SESSION['role']) == '1') { ?>
-                        <li class="nav-item list-group-item">
-                            <a class="nav-link" href="allusers.php">
-                                <span data-feather="file"></span>
-                                All Users
-                            </a>
-                        </li>
-                        <li class="nav-item list-group-item">
-                            <a class="nav-link" href="adduser.php">
-                                <span data-feather="file"></span>
-                                Add New User
-                            </a>
-                        </li>
-                    <?php  } ?>
+                    var chart = new CanvasJS.Chart("chartContainer", {
+                        animationEnabled: true,
+                        exportEnabled: true,
+                        theme: "light1", // "light1", "light2", "dark1", "dark2"
+                        title: {
+                            text: "Simple Column Chart with Index Labels"
+                        },
+                        axisY: {
+                            includeZero: true
+                        },
+                        data: [{
+                            type: "column", //change type to bar, line, area, pie, etc
+                            //indexLabel: "{y}", //Shows y value on all Data Points
+                            indexLabelFontColor: "#5A5757",
+                            indexLabelPlacement: "outside",
+                            dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
+                        }]
+                    });
+                    chart.render();
 
-
-                    <li class="nav-item list-group-item">
-                        <a class="nav-link" href="allpost.php">
-                            <span data-feather="file"></span>
-                            All Posts
-                        </a>
-                    </li>
-                    <li class="nav-item list-group-item">
-                        <a class="nav-link" href="addpost.php">
-                            <span data-feather="file"></span>
-                            Add Post
-                        </a>
-                    </li>
-                    <li class="nav-item list-group-item">
-                        <a class="nav-link" href="allcat.php">
-                            <span data-feather="file"></span>
-                            All Categories
-                        </a>
-                    </li>
-                    <li class="nav-item list-group-item">
-                        <a class="nav-link" href="addcat.php">
-                            <span data-feather="file"></span>
-                            Add Categories
-                        </a>
-                    </li>
-            </div>
-        </nav>
-        <div class="col-md-3 mt-5">
-
-        </div>
-        <div class="col-md-3 mt-5">
-            <h4>Edit Links</h4>
+                }
+            </script>
+            <div id="chartContainer" style="height: 370px; width: 100%;"></div>
         </div>
         <div class="col-md-4 mt-5">
             <h4>Average Updates</h4>
@@ -81,11 +73,14 @@
 </div>
 
 
+
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 <script src="/docs/5.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
 <script src="dashboard.js"></script>
+
 </body>
 
 </html>
